@@ -1,0 +1,26 @@
+name: Node.js Cl on:
+push:
+branches:
+- main
+pull_request: branches:
+- main
+schedule:
+- cron: '0 */6 **** # BY S-TEN jobs: build:
+runs-on: ubuntu-latest
+strategy: matrix:
+node-version: [20.x]
+steps:
+- name: Checkout repository uses: actions/checkout@v3
+- name: Set up Node .js
+uses: actions/setup-node(@v3
+with:
+node-version: ${( matrix.node-version }}
+- name: Install dependencies run: npi install
+- name: Install FEmpeg
+run: sudo apt-get install -y ffmpeg
+- name: Start application with timeout
+run:
+timeout 21590s npm start # Limite l'exécution à 5h
+- name: Save state (Optional)
+run: |
+•/save_state.sh
